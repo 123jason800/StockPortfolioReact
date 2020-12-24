@@ -13,12 +13,15 @@ class StockPortfolio extends React.Component {
 
         this.addStock = this.addStock.bind(this);
         this.handleFormChange = this.handleFormChange.bind(this);
-        this.handleChange - this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
     // On Submit, Adds a stock to this.state.stocks.
     addStock(event) {
         event.preventDefault();
-        const {currentForm,stocks} = this.state;
+        const stocks = [...this.state.stocks];
+        const currentForm = {
+                              ...this.state.currentForm
+                            };
         stocks.push(currentForm);
         // Reset Current Form and Change State of Stocks
         this.setState({stocks});
@@ -29,8 +32,7 @@ class StockPortfolio extends React.Component {
                 marketPrice: 0,
                 quantity: 0
             }
-        })
-
+        });
     }
 
     handleFormChange(event) {
@@ -40,13 +42,19 @@ class StockPortfolio extends React.Component {
         this.setState({currentForm});
     }
     
-    handleChange(event) {
-        console.log(event.target);
+    handleChange(event,key) {
         const {name,value} = event.target;
-        console.log(name,value);
+        const [...stocks] = this.state.stocks;
+        console.log(key);
+        const currentStock = stocks[key];
+        console.log(currentStock);
+        currentStock[name] = value;
+      
+        this.setState({stocks});
     }
 
     render() {
+        console.log(this.state.stocks);
         return (   
             <div className="container">
                 <StockTable stocks={this.state.stocks} handleChange={this.handleChange} />

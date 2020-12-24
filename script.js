@@ -1,5 +1,9 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -26,7 +30,7 @@ var StockPortfolio = function (_React$Component) {
 
         _this.addStock = _this.addStock.bind(_this);
         _this.handleFormChange = _this.handleFormChange.bind(_this);
-        _this.handleChange - _this.handleChange.bind(_this);
+        _this.handleChange = _this.handleChange.bind(_this);
         return _this;
     }
     // On Submit, Adds a stock to this.state.stocks.
@@ -36,10 +40,8 @@ var StockPortfolio = function (_React$Component) {
         key: 'addStock',
         value: function addStock(event) {
             event.preventDefault();
-            var _state = this.state,
-                currentForm = _state.currentForm,
-                stocks = _state.stocks;
-
+            var stocks = [].concat(_toConsumableArray(this.state.stocks));
+            var currentForm = Object.assign({}, this.state.currentForm);
             stocks.push(currentForm);
             // Reset Current Form and Change State of Stocks
             this.setState({ stocks: stocks });
@@ -65,17 +67,25 @@ var StockPortfolio = function (_React$Component) {
         }
     }, {
         key: 'handleChange',
-        value: function handleChange(event) {
-            console.log(event.target);
+        value: function handleChange(event, key) {
             var _event$target2 = event.target,
                 name = _event$target2.name,
                 value = _event$target2.value;
 
-            console.log(name, value);
+            var _state$stocks = _toArray(this.state.stocks),
+                stocks = _state$stocks.slice(0);
+
+            console.log(key);
+            var currentStock = stocks[key];
+            console.log(currentStock);
+            currentStock[name] = value;
+
+            this.setState({ stocks: stocks });
         }
     }, {
         key: 'render',
         value: function render() {
+            console.log(this.state.stocks);
             return React.createElement(
                 'div',
                 { className: 'container' },

@@ -1,3 +1,5 @@
+var _this = this;
+
 var StockTable = function StockTable(props) {
     var stocks = props.stocks,
         handleChange = props.handleChange;
@@ -15,22 +17,30 @@ var StockTable = function StockTable(props) {
             React.createElement(
                 "td",
                 null,
-                React.createElement("input", { className: "w-50", onChange: handleChange, type: "text", name: "name", value: name })
+                React.createElement("input", { className: "w-50", onChange: function onChange(e) {
+                        return _this.handleChange(e, index);
+                    }, type: "text", name: "name", value: name })
             ),
             React.createElement(
                 "td",
                 null,
-                React.createElement("input", { className: "w-25", onChange: handleChange, type: "number", name: "quantity", value: quantity })
+                React.createElement("input", { className: "w-25", onChange: function onChange(e) {
+                        return _this.handleChange(e, index);
+                    }, type: "number", name: "quantity", value: quantity })
             ),
             React.createElement(
                 "td",
                 null,
-                React.createElement("input", { className: "w-25", onChange: handleChange, type: "number", name: "costPerShare", value: costPerShare })
+                React.createElement("input", { className: "w-25", onChange: function onChange(e) {
+                        return _this.handleChange(e, index);
+                    }, type: "number", name: "costPerShare", value: costPerShare })
             ),
             React.createElement(
                 "td",
                 null,
-                React.createElement("input", { className: "w-25", onChange: handleChange, type: "number", name: "marketPrice", value: marketPrice })
+                React.createElement("input", { className: "w-25", onChange: function onChange(e) {
+                        return _this.handleChange(e, index);
+                    }, type: "number", name: "marketPrice", value: marketPrice })
             ),
             React.createElement(
                 "td",

@@ -6,10 +6,10 @@ const StockTable = (props) => {
         const {name,costPerShare,marketPrice,quantity} = stock;
         return (
             <tr key={index}>
-                    <td><input className="w-50" onChange={handleChange} type="text" name="name" value={name} /></td>
-                    <td><input className="w-25" onChange={handleChange} type="number" name="quantity" value={quantity}/></td>
-                    <td><input className="w-25" onChange={handleChange} type="number" name="costPerShare" value={costPerShare} /></td>
-                    <td><input className="w-25" onChange={handleChange} type="number" name="marketPrice" value={marketPrice} /></td>
+                    <td><input className="w-50" onChange={e => this.handleChange(e,index)} type="text" name="name" value={name} /></td>
+                    <td><input className="w-25" onChange={e => this.handleChange(e,index)} type="number" name="quantity" value={quantity}/></td>
+                    <td><input className="w-25" onChange={e => this.handleChange(e,index)} type="number" name="costPerShare" value={costPerShare} /></td>
+                    <td><input className="w-25" onChange={e => this.handleChange(e,index)} type="number" name="marketPrice" value={marketPrice} /></td>
                     <td>{marketPrice * quantity}</td>
                     <td>{(marketPrice - costPerShare) * quantity}</td>
                     <td><button className="btn btn-primary">Remove</button></td>
