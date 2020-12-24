@@ -14,14 +14,74 @@ var StockPortfolio = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (StockPortfolio.__proto__ || Object.getPrototypeOf(StockPortfolio)).call(this, props));
 
-        _this.state = {};
+        _this.state = {
+            stocks: [],
+            currentForm: {
+                name: '',
+                costPerShare: 0,
+                marketPrice: 0,
+                quantity: 0
+            }
+        };
+
+        _this.addStock = _this.addStock.bind(_this);
+        _this.handleFormChange = _this.handleFormChange.bind(_this);
+        _this.handleChange - _this.handleChange.bind(_this);
         return _this;
     }
+    // On Submit, Adds a stock to this.state.stocks.
+
 
     _createClass(StockPortfolio, [{
-        key: "render",
+        key: 'addStock',
+        value: function addStock(event) {
+            event.preventDefault();
+            var _state = this.state,
+                currentForm = _state.currentForm,
+                stocks = _state.stocks;
+
+            stocks.push(currentForm);
+            // Reset Current Form and Change State of Stocks
+            this.setState({ stocks: stocks });
+            this.setState({
+                currentForm: {
+                    name: '',
+                    costPerShare: 0,
+                    marketPrice: 0,
+                    quantity: 0
+                }
+            });
+        }
+    }, {
+        key: 'handleFormChange',
+        value: function handleFormChange(event) {
+            var _event$target = event.target,
+                name = _event$target.name,
+                value = _event$target.value;
+
+            var currentForm = this.state.currentForm;
+            currentForm[name] = value;
+            this.setState({ currentForm: currentForm });
+        }
+    }, {
+        key: 'handleChange',
+        value: function handleChange(event) {
+            console.log(event.target);
+            var _event$target2 = event.target,
+                name = _event$target2.name,
+                value = _event$target2.value;
+
+            console.log(name, value);
+        }
+    }, {
+        key: 'render',
         value: function render() {
-            return React.createElement("div", { className: "container" });
+            return React.createElement(
+                'div',
+                { className: 'container' },
+                React.createElement(StockTable, { stocks: this.state.stocks, handleChange: this.handleChange }),
+                React.createElement(AddStockForm, { handleChange: this.handleFormChange, addStock: this.addStock, currentForm: this.state.currentForm })
+            );
         }
     }]);
 
