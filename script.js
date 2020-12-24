@@ -31,6 +31,7 @@ var StockPortfolio = function (_React$Component) {
         _this.addStock = _this.addStock.bind(_this);
         _this.handleFormChange = _this.handleFormChange.bind(_this);
         _this.handleChange = _this.handleChange.bind(_this);
+        _this.deleteItem = _this.deleteItem.bind(_this);
         return _this;
     }
     // On Submit, Adds a stock to this.state.stocks.
@@ -75,22 +76,33 @@ var StockPortfolio = function (_React$Component) {
             var _state$stocks = _toArray(this.state.stocks),
                 stocks = _state$stocks.slice(0);
 
-            console.log(key);
             var currentStock = stocks[key];
-            console.log(currentStock);
             currentStock[name] = value;
 
             this.setState({ stocks: stocks });
         }
     }, {
+        key: 'deleteItem',
+        value: function deleteItem(key) {
+            var stocks = this.state.stocks.filter(function (stock, id) {
+                return id !== key;
+            });
+            this.setState({ stocks: stocks });
+        }
+    }, {
         key: 'render',
         value: function render() {
-            console.log(this.state.stocks);
             return React.createElement(
                 'div',
                 { className: 'container' },
-                React.createElement(StockTable, { stocks: this.state.stocks, handleChange: this.handleChange }),
-                React.createElement(AddStockForm, { handleChange: this.handleFormChange, addStock: this.addStock, currentForm: this.state.currentForm })
+                React.createElement(
+                    'h1',
+                    { className: 'text-center' },
+                    'Stock Portfolio'
+                ),
+                React.createElement(AddStockForm, { handleChange: this.handleFormChange, addStock: this.addStock, currentForm: this.state.currentForm }),
+                React.createElement(StockTable, { stocks: this.state.stocks, handleChange: this.handleChange, deleteItem: this.deleteItem }),
+                React.createElement(DisplayTotal, { stocks: this.state.stocks })
             );
         }
     }]);

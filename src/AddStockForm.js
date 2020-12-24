@@ -2,12 +2,12 @@ const AddStockForm = (props) => {
     const {handleChange,addStock,currentForm} = props;
     const {name,costPerShare,marketPrice,quantity} = currentForm;
     return (
-            <form  onSubmit={addStock} className="row justify-content-center ">
+            <form onSubmit={addStock} className="row justify-content-center mt-5">
                 <div className="col-2">
                     <label className="d-block" htmlFor="name"> Stock Name</label>
                     <input 
                     onChange={handleChange} 
-                    className="w-75" 
+                    className="w-100" 
                     type="text" 
                     name="name"
                     value={name} 

@@ -1,8 +1,7 @@
-var _this = this;
-
 var StockTable = function StockTable(props) {
     var stocks = props.stocks,
-        handleChange = props.handleChange;
+        handleChange = props.handleChange,
+        deleteItem = props.deleteItem;
 
 
     stocks = stocks.map(function (stock, index) {
@@ -17,103 +16,113 @@ var StockTable = function StockTable(props) {
             React.createElement(
                 "td",
                 null,
-                React.createElement("input", { className: "w-50", onChange: function onChange(e) {
-                        return _this.handleChange(e, index);
+                React.createElement("input", { className: "w-75", onChange: function onChange(e) {
+                        return handleChange(e, index);
                     }, type: "text", name: "name", value: name })
             ),
             React.createElement(
                 "td",
                 null,
-                React.createElement("input", { className: "w-25", onChange: function onChange(e) {
-                        return _this.handleChange(e, index);
+                React.createElement("input", { className: "w-75", onChange: function onChange(e) {
+                        return handleChange(e, index);
                     }, type: "number", name: "quantity", value: quantity })
             ),
             React.createElement(
                 "td",
                 null,
-                React.createElement("input", { className: "w-25", onChange: function onChange(e) {
-                        return _this.handleChange(e, index);
+                React.createElement("input", { className: "w-75", onChange: function onChange(e) {
+                        return handleChange(e, index);
                     }, type: "number", name: "costPerShare", value: costPerShare })
             ),
             React.createElement(
                 "td",
                 null,
-                React.createElement("input", { className: "w-25", onChange: function onChange(e) {
-                        return _this.handleChange(e, index);
+                React.createElement("input", { className: "w-75", onChange: function onChange(e) {
+                        return handleChange(e, index);
                     }, type: "number", name: "marketPrice", value: marketPrice })
             ),
             React.createElement(
                 "td",
                 null,
-                marketPrice * quantity
+                (marketPrice * quantity).toFixed(2),
+                " "
             ),
             React.createElement(
                 "td",
                 null,
-                (marketPrice - costPerShare) * quantity
+                ((marketPrice - costPerShare) * quantity).toFixed(2)
             ),
             React.createElement(
                 "td",
                 null,
                 React.createElement(
                     "button",
-                    { className: "btn btn-primary" },
+                    { onClick: function onClick() {
+                            return deleteItem(index);
+                        }, className: "btn btn-primary" },
                     "Remove"
                 )
             )
         );
     });
-
-    return React.createElement(
-        "table",
-        { className: "table text-center" },
-        React.createElement(
-            "thead",
-            null,
+    if (stocks.length > 0) {
+        return React.createElement(
+            "table",
+            { className: "table text-center mt-5" },
             React.createElement(
-                "tr",
+                "thead",
                 null,
                 React.createElement(
-                    "th",
-                    { scope: "col" },
-                    "Stock Name"
-                ),
-                React.createElement(
-                    "th",
-                    { scope: "col" },
-                    "Shares Owned"
-                ),
-                React.createElement(
-                    "th",
-                    { scope: "col" },
-                    "Cost Per Share"
-                ),
-                React.createElement(
-                    "th",
-                    { scope: "col" },
-                    "Market Price"
-                ),
-                React.createElement(
-                    "th",
-                    { scope: "col" },
-                    "Market Value"
-                ),
-                React.createElement(
-                    "th",
-                    { scope: "col" },
-                    "Unrealized Gain/Loss"
-                ),
-                React.createElement(
-                    "th",
-                    { scope: "col" },
-                    " "
+                    "tr",
+                    null,
+                    React.createElement(
+                        "th",
+                        { scope: "col" },
+                        "Stock Name"
+                    ),
+                    React.createElement(
+                        "th",
+                        { scope: "col" },
+                        "Shares Owned"
+                    ),
+                    React.createElement(
+                        "th",
+                        { scope: "col" },
+                        "Cost Per Share"
+                    ),
+                    React.createElement(
+                        "th",
+                        { scope: "col" },
+                        "Market Price"
+                    ),
+                    React.createElement(
+                        "th",
+                        { scope: "col" },
+                        "Market Value"
+                    ),
+                    React.createElement(
+                        "th",
+                        { scope: "col" },
+                        "Unrealized Gain/Loss"
+                    ),
+                    React.createElement(
+                        "th",
+                        { scope: "col" },
+                        " "
+                    )
                 )
+            ),
+            React.createElement(
+                "tbody",
+                null,
+                stocks
             )
-        ),
-        React.createElement(
-            "tbody",
-            null,
-            stocks
-        )
-    );
+        );
+    } else {
+        return React.createElement(
+            "h2",
+            { className: "my-5 text-center" },
+            "Please Add Some Stocks"
+        );
+    }
 };

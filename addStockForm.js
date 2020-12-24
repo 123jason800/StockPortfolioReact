@@ -9,7 +9,7 @@ var AddStockForm = function AddStockForm(props) {
 
     return React.createElement(
         "form",
-        { onSubmit: addStock, className: "row justify-content-center " },
+        { onSubmit: addStock, className: "row justify-content-center mt-5" },
         React.createElement(
             "div",
             { className: "col-2" },
@@ -20,7 +20,7 @@ var AddStockForm = function AddStockForm(props) {
             ),
             React.createElement("input", {
                 onChange: handleChange,
-                className: "w-75",
+                className: "w-100",
                 type: "text",
                 name: "name",
                 value: name,
